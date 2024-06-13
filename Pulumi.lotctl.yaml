@@ -1,0 +1,7 @@
+config:
+  gcp:project: pulumi-test-418916
+  gcp:region: us-west1
+  pulumi-gcp-serverless:appPath: ./app
+  pulumi-gcp-serverless:errorDocument: error.html
+  pulumi-gcp-serverless:indexDocument: index.html
+  pulumi-gcp-serverless:sitePath: ./www

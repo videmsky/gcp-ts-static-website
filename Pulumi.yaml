@@ -1,0 +1,7 @@
+name: gcp-ts-static-website
+runtime: nodejs
+description: A TypeScript program to deploy a serverless application on Google Cloud
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: serverless-gcp-typescript
