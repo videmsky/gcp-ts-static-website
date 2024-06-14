@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4.0.2
+        with:
+          node-version-file: package.json
       - id: auth
         uses: google-github-actions/auth@v2
         with:
@@ -21,5 +24,13 @@ jobs:
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-      - name: gcloud
-        run: gcloud services list
+      # - name: gcloud
+      #   run: gcloud services list
+      - run: npm install
+      - uses: pulumi/actions@v5
+        with:
+          command: up
+          stack-name: team-ce/lotctl
+          upsert: true
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
