@@ -17,13 +17,9 @@ jobs:
       - id: auth
         uses: google-github-actions/auth@v2
         with:
-          token_format: 'access_token'
-          create_credentials_file: 'true'
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
-          access_token_lifetime: '3600s'
-      - id: 'gcloud'
-        name: 'gcloud'
-        run: |-
-          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-          gcloud services list
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+      - name: gcloud
+        run: gcloud services list
