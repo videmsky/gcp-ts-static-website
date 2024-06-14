@@ -16,6 +16,9 @@ const siteBucket = new gcp.storage.Bucket("site-bucket", {
 		mainPageSuffix: indexDocument,
 		notFoundPage: errorDocument,
 	},
+	labels: {
+		owner: "laci",
+	},
 });
 
 // Create an IAM binding to allow public read access to the bucket.
@@ -34,6 +37,9 @@ const syncedFolder = new synced.GoogleCloudFolder("synced-folder", {
 // Create another storage bucket for the serverless app.
 const appBucket = new gcp.storage.Bucket("app-bucket", {
   location: "US",
+	labels: {
+		owner: "laci",
+	},
 });
 
 // Upload the serverless app to the storage bucket.
