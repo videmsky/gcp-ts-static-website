@@ -14,19 +14,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up NodeJS
-        uses: actions/setup-node@v4.0.2
-        with:
-          node-version-file: package.json
       - id: auth
+        name: Google Cloud Auth
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
-      # - name: gcloud
-      #   run: gcloud services list
+      - name: Verify gcloud SDK installation
+        run: gcloud --version
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version-file: package.json
       - name: NPM Install
         run: npm install
       - name: Run Pulumi
