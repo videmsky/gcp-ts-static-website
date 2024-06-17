@@ -13,5 +13,15 @@ new PolicyPack("lotctl-gcp", {
 				}
 			}),
 		},
+		{
+			name: "detect-iam-binding",
+			description: "Detects any IAM Binding resources.",
+			enforcementLevel: "advisory",
+			validateResource: (args, reportViolation) => {
+				if (args.type.includes("IAMBinding")) {
+					reportViolation("IAM Binding detected.");
+				}
+			},
+		},
 	],
 });
